@@ -1,0 +1,56 @@
+@function px($n) {
+  @return ($n / 2 / 20) * 1rem;
+}
+
+@mixin flex($justifyContent: flex-start, $alignContent: center) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignContent;
+}
+
+@mixin fontLineColor($fontSize: 14px, $lineHeight: 16px, $color: #333) {
+  font-size: $fontSize;
+  line-height: $lineHeight;
+  color: $color;
+}
+
+@mixin widthHeight($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+
+@mixin textOverflowHidden($maxWidth) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: $maxWidth;
+  word-break: break-all;
+}
+
+@mixin multipleLineTextOverflow($lineNum: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lineNum;
+  -webkit-box-orient: vertical;
+}
+
+@mixin icon($width: 100%, $height: 100%) {
+  @include widthHeight($width, $height);
+
+  &-img {
+    @include widthHeight();
+    vertical-align: top;
+  }
+}
+
+@mixin triangle($direction, $bgc, $border) {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border: $border solid transparent;
+    border-#{$direction}-color: $bgc;
+  }
+}

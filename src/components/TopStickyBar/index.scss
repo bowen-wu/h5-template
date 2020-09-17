@@ -1,9 +1,10 @@
 @import "src/utils/mixin";
 
 .top-sticky-bar {
-  border: 1px solid red;
   position: fixed;
   top: 0;
   left: 0;
-  height: 52px;
+  height: $topStickyBarHeight;
+  width: 100%;
+  @include flex();
 }

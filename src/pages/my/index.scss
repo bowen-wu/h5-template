@@ -1,0 +1,17 @@
+@import "src/utils/mixin";
+
+.my {
+  &-top-bar {
+    padding: 0 10px 0 15px;
+    background-color: #f44849;
+
+    &-icon {
+      @include icon(30px, 30px);
+    }
+
+    &-setting {
+      margin-left: auto;
+      @include icon(30px, 30px);
+    }
+  }
+}

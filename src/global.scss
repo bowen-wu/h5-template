@@ -1,3 +1,5 @@
+@import "src/utils/mixin";
+
 html,
 body,
 #root {
@@ -25,5 +27,10 @@ body {
 ul,
 ol {
   list-style: none;
+}
+
+.am-toast-notice-content .am-toast-text {
+  @include fontLineColor(16px, 20px, #fff);
+  padding: 12px 24px
 }
 

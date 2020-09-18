@@ -6,5 +6,29 @@
   left: 0;
   height: $topStickyBarHeight;
   width: 100%;
+  padding: 0 10px 0 15px;
+  background-color: #fff;
   @include flex();
+
+  @mixin verticalCenter {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    @include icon(30px, 30px);
+  }
+
+  &-back {
+    @include verticalCenter();
+    left: 15px;
+  }
+
+  &-title {
+    margin: 0 auto;
+    @include fontLineColor(18px, 25px, #000);
+  }
+
+  &-right {
+    @include verticalCenter();
+    right: 15px;
+  }
 }

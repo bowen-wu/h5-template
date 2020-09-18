@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { history } from 'umi';
 
 export interface PageInfoInterface {
   method: string;
@@ -8,7 +8,6 @@ export interface PageInfoInterface {
 
 const useGoToPage = () => {
   const { userAgent } = navigator;
-  const history = useHistory();
 
   return (pageInfo: PageInfoInterface) => {
     const { method, params, callback } = pageInfo;
@@ -16,13 +15,13 @@ const useGoToPage = () => {
       // h5
       if (method === 'Controller.pop') {
         history.goBack();
-      } else {
-        params && params.route && history.push(params.route);
+      }
+      if (params && params.route) {
+        history.push(params.route);
       }
     } else {
       // App
       const route = params?.route;
-      delete pageInfo.params?.route;
       const extraConfig = (() => {
         if (params?.type === TypeEnum.url) {
           return {

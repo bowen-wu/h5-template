@@ -12,12 +12,12 @@ interface TopStickyBarProps {
   className?: string;
   children?: ReactNode;
   title?: string;
-  leftIcon?: boolean | ReactNode;
+  leftElement?: boolean | ReactNode;
   leftIconSrc?: string;
-  onLeftIconHandle?: (props: TopStickyBarProps) => void;
-  rightIcon?: boolean | ReactNode;
+  onLeftElementHandle?: (props: TopStickyBarProps) => void;
+  rightElement?: boolean | ReactNode;
   rightIconSrc?: string;
-  onRightIconHandle?: (props: TopStickyBarProps) => void;
+  onRightElementHandle?: (props: TopStickyBarProps) => void;
 }
 
 const TopStickyBar = (props: TopStickyBarProps) => {
@@ -34,41 +34,55 @@ const TopStickyBar = (props: TopStickyBarProps) => {
   }, []);
 
   const leftIconElement = useCallback(() => {
-    if (props.leftIcon === false) {
+    if (props.leftElement === false) {
       return null;
     }
-    if (props.leftIcon === true || props.leftIcon === undefined) {
+    if (props.leftElement === true || props.leftElement === undefined) {
       return (
         <div
           className={sc('back')}
-          onClick={onIconHandle.bind(null, props.onLeftIconHandle, 'left')}
+          onClick={onIconHandle.bind(null, props.onLeftElementHandle, 'left')}
         >
           <img src={props.leftIconSrc || LeftArrow} alt="" />
         </div>
       );
     }
-    return props.leftIcon;
-  }, [props.leftIcon, props.leftIconSrc]);
+    return props.leftElement;
+  }, [props.leftElement, props.leftIconSrc]);
 
   const rightIconElement = useCallback(() => {
-    if (props.rightIcon === false) {
+    if (props.rightElement === false) {
       return null;
     }
-    if (props.rightIcon === true || props.rightIcon === undefined) {
+    if (props.rightElement === true || props.rightElement === undefined) {
       if (props.rightIconSrc) {
         return (
           <div
-            className={sc('right')}
-            onClick={onIconHandle.bind(null, props.onRightIconHandle, 'right')}
+            className={sc({ right: true, icon: true })}
+            onClick={onIconHandle.bind(
+              null,
+              props.onRightElementHandle,
+              'right',
+            )}
           >
             <img src={props.rightIconSrc} alt="" />
           </div>
         );
       }
-      return null;
+      if (props.rightElement === undefined) {
+        return null;
+      }
+      throw new Error('当 rightElement === true 时，必须提供 rightIconSrc');
     }
-    return props.rightIcon;
-  }, [props.rightIcon, props.rightIconSrc]);
+    return (
+      <div
+        className={sc('right')}
+        onClick={onIconHandle.bind(null, props.onRightElementHandle, 'right')}
+      >
+        {props.rightElement}
+      </div>
+    );
+  }, [props.rightElement, props.rightIconSrc]);
 
   return (
     <div className={`${sc()} ${props.className}`}>

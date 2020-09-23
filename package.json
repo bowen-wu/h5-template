@@ -4,20 +4,28 @@
     "start": "umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",
-    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "test:coverage": "umi-test --coverage",
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint-staged": "lint-staged",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "check-prettier lint",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "prettier": "prettier -c --write \"**/*\""
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
+    "**/*.scss": "stylelint --syntax scss",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write",
+      "git add"
     ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
+    "**/*.{js,jsx}": "npm run lint-staged:js",
+    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
   },
   "checkFiles": [
     "src/**/*.js*",
@@ -37,6 +45,7 @@
     "moment": "^2.28.0",
     "prettier": "^1.19.1",
     "querystring": "^0.2.0",
+    "rc-field-form": "^1.12.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.2.0",
@@ -44,8 +53,14 @@
     "yorkie": "^2.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^4.2.0",
     "@umijs/fabric": "^2.2.2",
+    "eslint": "^7.9.0",
+    "eslint-plugin-react": "^7.20.6",
     "node-sass": "^4.14.1",
-    "sass-loader": "^10.0.2"
+    "sass-loader": "^10.0.2",
+    "stylelint": "^13.7.1",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0"
   }
 }

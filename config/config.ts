@@ -4,7 +4,6 @@ import routes from './routes';
 export default defineConfig({
   plugins: ['@alitajs/hd'],
   dva: {
-    immer: true,
     hmr: true,
   },
   nodeModulesTransform: {

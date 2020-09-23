@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "outDir": "build/dist",
+    "lib": ["esnext", "dom"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -13,12 +22,26 @@
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true
   },
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts",
+    "tslint:latest",
+    "tslint-config-prettier"
+  ],
   "include": [
     "mock/**/*",
     "src/**/*",
     "config/**/*",
-    "typings.d.ts"
+    "typings.d.ts",
+    ".eslintrc.js"
   ]
 }

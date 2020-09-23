@@ -38,14 +38,6 @@ const errorHandler = (error: { response: Response; message: string }) => {
   return response;
 };
 
-export const dva = {
-  config: {
-    onError(e: Error) {
-      Toast.fail(e.message);
-    },
-  },
-};
-
 export const request: RequestConfig = {
   timeout: 1000,
   errorHandler, // 默认错误处理

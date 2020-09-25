@@ -1,5 +1,7 @@
 import React, { Fragment, ReactNode, useCallback } from 'react';
-import useGoToPage from '@/components/useHooks/useGoToPage';
+import useGoToPage, {
+  WebviewSkipMethod,
+} from '@/components/useHooks/useGoToPage';
 import scopedClasses from '@/utils/scopedClasses';
 import LeftArrow from '@/assets/image/component/left_arrow_top_bar.svg';
 
@@ -29,7 +31,7 @@ const TopStickyBar = (props: TopStickyBarProps) => {
       return;
     }
     if (type === 'left') {
-      goToPage({ method: 'Controller.pop' });
+      goToPage({ method: WebviewSkipMethod.POP });
     }
   }, []);
 

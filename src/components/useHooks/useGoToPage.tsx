@@ -70,6 +70,8 @@ const useGoToPage = () => {
 
   return (pageInfo: PageInfoInterface) => {
     const { method, params, callback } = pageInfo;
+
+    // TODO: 判断是否在 APP 内
     if (userAgent.indexOf('Safari') >= 0) {
       // h5
       if (method === WebviewSkipMethod.POP) {
@@ -78,7 +80,7 @@ const useGoToPage = () => {
       if (params && params.route) {
         history.push({
           pathname: params.route,
-          query: params.query || {},
+          query: params.query || { title: params.title },
         });
       }
     } else {

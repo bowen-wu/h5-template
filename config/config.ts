@@ -10,7 +10,11 @@ export default defineConfig({
     type: 'none',
   },
   define: {},
+  hash: true,
   routes,
+  theme: {
+    hd: '1px',
+  },
   hd: {
     theme: {},
     px2rem: {
@@ -29,5 +33,14 @@ export default defineConfig({
       mediaQuery: false,
       minPixelValue: 0,
     },
+  },
+
+  // TODO: scss 全局变量
+  sass: {
+    prependData: `
+      $topStickyBarHeight: '52px';
+      $padding: '15px';
+      $borderRadius: '10px';
+   `,
   },
 });

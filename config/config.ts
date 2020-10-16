@@ -9,7 +9,10 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  define: {},
+  define: {
+    APP_MARK: 'AldtMall,GongFuDai',
+    PRODUCT_NAME: '寄速麦',
+  },
   hash: true,
   routes,
   theme: {
@@ -34,13 +37,26 @@ export default defineConfig({
       minPixelValue: 0,
     },
   },
-
-  // TODO: scss 全局变量
-  sass: {
-    prependData: `
-      $topStickyBarHeight: '52px';
-      $padding: '15px';
-      $borderRadius: '10px';
-   `,
+  sass: {},
+  chainWebpack: config => {
+    const oneOfsMap = config.module.rule('sass').oneOfs.values();
+    oneOfsMap.forEach(item => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          /**
+           * scss 全局文件
+           * 注意：此处是 ./src/**
+           */
+          resources: [
+            './src/assets/styles/_variable.scss',
+            './src/assets/styles/_mixin.scss',
+            './src/assets/styles/_zIndex.scss',
+            './src/assets/styles/_function.scss',
+          ],
+        })
+        .end();
+    });
   },
 });

@@ -1,18 +1,40 @@
-@import "src/utils/mixin";
 
 .public-single-action {
   @include flex(center, center);
   margin-top: 50px;
 
   &-text {
-    @include fontLineColor(16px, 22px, #fff);
-    padding: 10px 25px;
-    background: linear-gradient(135deg, #F75757 0%, #F73131 100%);
-    border-radius: 29px;
     border: none;
+    @include fontLineColor(16px, 22px, #fff);
+    background: transparent;
+  }
 
-    &.public-single-action-disabled {
-      background: #FFBFB9;
+  &.public-single-action-freedom {
+    .public-single-action-text {
+      background: linear-gradient(135deg, #f0d9c5 0%, #bd9f8a 100%);
+      border-radius: 29px;
+      padding: 10px 25px;
+
+      &.public-single-action-disabled {
+        background: #efddcb;
+      }
+    }
+  }
+
+  &.public-single-action-sticky-bottom {
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    background: linear-gradient(135deg, #f0d9c5 0%, #bd9f8a 100%);
+
+    .public-single-action-text {
+      padding: $padding 25px;
+
+      &.public-single-action-disabled {
+        background: #efddcb;
+      }
     }
   }
 }

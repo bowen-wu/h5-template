@@ -1,6 +1,6 @@
 export default {
   define: {
-    BASEURL: 'dev',
+    BASE_URL: 'dev',
     BASE_PREFIX: '/prefix',
   },
 };

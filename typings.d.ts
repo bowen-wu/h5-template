@@ -47,5 +47,5 @@ interface Window {
   onNativeLeftButtonClick: () => void;
 }
 
-declare const BASEURL: string;
+declare const BASE_URL: string;
 declare const BASE_PREFIX: string;

@@ -100,6 +100,7 @@ export const request: RequestConfig = {
       if (response.status !== 200 || data.code !== 0) {
         errorHandler({ data, name: 'business error', message: data.message });
       }
+      Toast.hide();
       return response;
     },
   ],

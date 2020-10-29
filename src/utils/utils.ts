@@ -5,11 +5,13 @@ export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 export const getDayStr = (daysFromToday: number, connector = '-') => {
   const discrepancyTimestamp = 24 * 3600 * 1000 * daysFromToday;
   const today = new Date();
-  today.setTime(parseInt((today.getTime() + discrepancyTimestamp).toString(), 10));
+  today.setTime(
+    parseInt((today.getTime() + discrepancyTimestamp).toString(), 10),
+  );
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const monthStr = `${month <= 9 ? '0' : ''}${month}`;
-  const dayStr = `${!(today.getDate() > 9) ? '0' : ''}${today.getDate()}`;
+  const dayStr = `${!(today.getDate() >= 9) ? '0' : ''}${today.getDate()}`;
   return `${year}${connector}${monthStr}${connector}${dayStr}`;
 };
 
@@ -17,7 +19,7 @@ export const getLastMonthStr = (connector = '-') => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth();
-  const monthStr = `${!(month > 9) ? '0' : ''}${month}`;
+  const monthStr = `${!(month >= 9) ? '0' : ''}${month}`;
   if (month === 0) {
     return `${year - 1}${connector}${12}`;
   }
@@ -76,5 +78,7 @@ export const isMobile = (mobile: string) => /^1[3456789]\d{9}$/g.test(mobile);
 
 export const isEmail = (value: string) => {
   const email = value ? value.trim() : value;
-  return /^([a-zA-Z0-9])([a-zA-Z0-9_\.\-]){2,}([a-zA-Z0-9])\@(([a-zA-Z0-9\-])+\.)+(com|edu|gov|int|mil|net|org|biz|info|pro|name|museum|coop|aero|xxx|idv|cn)$/.test(email);
+  return /^([a-zA-Z0-9])([a-zA-Z0-9_\.\-]){2,}([a-zA-Z0-9])\@(([a-zA-Z0-9\-])+\.)+(com|edu|gov|int|mil|net|org|biz|info|pro|name|museum|coop|aero|xxx|idv|cn)$/.test(
+    email,
+  );
 };

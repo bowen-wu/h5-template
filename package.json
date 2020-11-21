@@ -1,69 +1,73 @@
 {
-  "private": true,
-  "scripts": {
-    "start": "umi dev",
-    "build:test": "cross-env UMI_ENV=test umi build",
-    "build:dev": "cross-env UMI_ENV=dev umi build",
-    "build:prod": "cross-env UMI_ENV=prod umi build",
-    "postinstall": "umi generate tmp",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage",
-    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
-    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
-    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:prettier": "check-prettier lint",
-    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "prettier": "prettier -c --write \"**/*\""
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "**/*.scss": "stylelint --syntax scss",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": [
-      "prettier --write",
-      "git add"
+    "private": true,
+    "scripts": {
+        "start": "umi dev",
+        "build:test": "cross-env UMI_ENV=test umi build",
+        "build:dev": "cross-env UMI_ENV=dev umi build",
+        "build:prod": "cross-env UMI_ENV=prod umi build",
+        "postinstall": "umi generate tmp",
+        "test": "umi-test",
+        "test:coverage": "umi-test --coverage",
+        "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
+        "lint-staged": "lint-staged",
+        "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+        "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+        "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+        "lint:prettier": "check-prettier lint",
+        "lint:style": "stylelint --fix \"src/**/*.scss\" --syntax scss",
+        "prettier": "prettier -c --write \"**/*\""
+    },
+    "lint-staged": {
+        "**/*.scss": "stylelint --syntax scss",
+        "**/*.{js,jsx,tsx,ts,scss,md,json}": [
+            "prettier --write",
+            "git add"
+        ],
+        "**/*.{js,jsx}": "npm run lint-staged:js",
+        "**/*.{js,ts,tsx}": "npm run lint-staged:js"
+    },
+    "checkFiles": [
+        "src/**/*.js*",
+        "src/**/*.ts*",
+        "src/**/*.scss",
+        "config/**/*.js*",
+        "scripts/**/*.js"
     ],
-    "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
-  },
-  "checkFiles": [
-    "src/**/*.js*",
-    "src/**/*.ts*",
-    "src/**/*.scss",
-    "config/**/*.js*",
-    "scripts/**/*.js"
-  ],
-  "dependencies": {
-    "@alitajs/hd": "^2.5.14",
-    "@ant-design/pro-layout": "^5.0.12",
-    "@umijs/plugin-sass": "^1.1.1",
-    "@umijs/preset-react": "1.x",
-    "@umijs/test": "^3.2.20",
-    "antd-mobile": "^2.3.3",
-    "lint-staged": "^10.0.7",
-    "moment": "^2.28.0",
-    "prettier": "^1.19.1",
-    "querystring": "^0.2.0",
-    "rc-field-form": "^1.12.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.2.0",
-    "umi": "^3.2.20",
-    "yorkie": "^2.0.0"
-  },
-  "devDependencies": {
-    "@typescript-eslint/parser": "^4.2.0",
-    "@umijs/fabric": "^2.2.2",
-    "eslint": "^7.9.0",
-    "eslint-plugin-react": "^7.20.6",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^10.0.2",
-    "sass-resources-loader": "^2.1.1",
-    "stylelint": "^13.7.1",
-    "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.18.0"
-  }
+    "dependencies": {
+        "@alitajs/hd": "^2.5.14",
+        "@ant-design/pro-layout": "^5.0.12",
+        "@umijs/plugin-sass": "^1.1.1",
+        "@umijs/preset-react": "1.x",
+        "@umijs/test": "^3.2.20",
+        "antd-mobile": "^2.3.3",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-jest": "^24.1.1",
+        "history": "^5.0.0",
+        "lint-staged": "^10.0.7",
+        "moment": "^2.28.0",
+        "prettier": "^1.19.1",
+        "querystring": "^0.2.0",
+        "rc-field-form": "^1.12.0",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-router-dom": "^5.2.0",
+        "stylelint-config-standard": "^20.0.0",
+        "umi": "^3.2.20",
+        "yorkie": "^2.0.0"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^11.0.0",
+        "@commitlint/config-conventional": "^11.0.0",
+        "@typescript-eslint/parser": "^4.2.0",
+        "@umijs/fabric": "^2.2.2",
+        "eslint": "^7.9.0",
+        "eslint-plugin-react": "^7.20.6",
+        "husky": "^4.3.0",
+        "node-sass": "^4.14.1",
+        "sass-loader": "^10.0.2",
+        "sass-resources-loader": "^2.1.1",
+        "stylelint": "^13.7.1",
+        "stylelint-order": "^4.1.0",
+        "stylelint-scss": "^3.18.0"
+    }
 }
